@@ -1,9 +1,11 @@
 potential-happiness
 ===================
 
-A dashboard for the terminal, for use with
-[riemann](http://riemann.io/) and/or
-[elasticsearch](https://www.elastic.co/products/elasticsearch).
+A dashboard for the terminal, for use with [riemann][riemann] and/or
+[elasticsearch][elasticsearch].
+
+ [riemann]: http://riemann.io/
+ [elasticsearch]: https://www.elastic.co/products/elasticsearch
 
 Demo
 ----
