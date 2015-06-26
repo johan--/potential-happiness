@@ -2,13 +2,39 @@
  * A dashboard for Riemann stats
  */
 
-var ph   = require ('../lib/index'),
-    util = require ('../lib/util');
+var ph      = require ('../lib/index'),
+    util    = require ('../lib/util'),
+    bunyan  = require ('bunyan');
+
+function LogToBunyan () {
+    var bun = bunyan.createLogger ({
+        name: 'potential-happiness/examples/local-log',
+        streams: [
+            {level: 'info',
+             path: 'ph.local-log.log'}
+        ]
+    });
+    this.error = bun.error.bind (bun);
+    this.warning = bun.warn.bind (bun);
+    this.info = bun.info.bind (bun);
+    this.debug = bun.debug.bind (bun);
+    this.trace = function (method, requestUrl, body, responseBody, responseStatus) {
+        bun.trace ({
+            method: method,
+            requestUrl: requestUrl,
+            body: body,
+            responseBody: responseBody,
+            responseStatus: responseStatus
+        });
+    };
+    this.close = function () { };
+}
 
 module.exports = {
     grid: {rows: 9, cols: 18},
     defaults: {
-        source: {host: process.env.RIEMANN_HOST || "127.0.0.1"}
+        source: {host: process.env.RIEMANN_HOST || "127.0.0.1"},
+        logger: LogToBunyan
     },
     widgets: [
         {widget: ph.widgets.text,
