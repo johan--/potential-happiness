@@ -15,8 +15,9 @@
     "license": "GPL-3+",
     "dependencies": {
         "blessed": "0.1.54",
-        "blessed-contrib": "2.0.5",
+        "blessed-contrib": "yaronn/blessed-contrib",
         "ws": "0.7.2",
-        "elasticsearch": "4.1.0"
+        "elasticsearch": "4.1.0",
+        "bunyan": "1.4.0"
     }
 }
