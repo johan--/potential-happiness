@@ -2,13 +2,39 @@
  * This is the configuration used by the author.
  */
 
-var ph   = require ('../lib/index'),
-    util = require ('../lib/util');
+var ph     = require ('../lib/index'),
+    util   = require ('../lib/util'),
+    bunyan = require ('bunyan');
+
+function LogToBunyan () {
+    var bun = bunyan.createLogger ({
+        name: 'potential-happiness/madhouse-project.org',
+        streams: [
+            {level: 'info',
+             path: 'logs/madhouse-project.org.log'}
+        ]
+    });
+    this.error = bun.error.bind (bun);
+    this.warning = bun.warn.bind (bun);
+    this.info = bun.info.bind (bun);
+    this.debug = bun.debug.bind (bun);
+    this.trace = function (method, requestUrl, body, responseBody, responseStatus) {
+        bun.trace ({
+            method: method,
+            requestUrl: requestUrl,
+            body: body,
+            responseBody: responseBody,
+            responseStatus: responseStatus
+        });
+    };
+    this.close = function () { };
+}
 
 module.exports = {
     grid: {rows: 10, cols: 14},
     defaults: {
-        source: {host: "10.243.42.34"}
+        source: {host: "10.243.42.34"},
+        logger: LogToBunyan
     },
     widgets: [
         {widget: ph.widgets.line_chart,
