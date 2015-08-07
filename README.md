@@ -38,6 +38,20 @@ For the `examples/local-log.js` example to work, one will need
 running. The former also needs to be configured to accept WebSocket
 connections.
 
+### Dependencies
+
+For those not using `npm`, the JavaScript dependencies are
+[blessed][blessed] and [blessed-contrib][blessed-contrib] (for the
+UI), [ws][ws] (for the Riemann WebSocket source),
+[elasticsearch][elastic-js] (for the ElasticSearch module), and
+[bunyan][bunyan] for logging.
+
+  [blessed]: https://github.com/chjj/blessed
+  [blessed-contrib]: https://github.com/yaronn/blessed-contrib
+  [ws]: https://github.com/websockets/ws
+  [elastic-js]: https://github.com/elastic/elasticsearch-js
+  [bunyan]: https://github.com/trentm/node-bunyan
+
 License
 -------
 
