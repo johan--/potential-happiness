@@ -12,7 +12,7 @@
         "email": "<algernon@madhouse-project.org>",
         "url": "http://asylum.madhouse-project.org"
     },
-    "license": "GPL-3+",
+    "license": "GPL-3.0+",
     "dependencies": {
         "blessed": "0.1.54",
         "blessed-contrib": "yaronn/blessed-contrib",
