@@ -96,63 +96,23 @@ module.exports = {
          pos_x: 13,
          width: 1,
          height: 1},
-
-        {widget: ph.widgets.sparkline,
-         options: {label: "SSH invalid logins",
-                   source: {query: 'service =~ "tail-auth/counter-sshd-invalid_user"'}},
+        {widget: ph.widgets.text,
+         options: {label: "Mastodon/# users",
+                   source: {query: 'service = "mastodon/user-count"',
+                            transform: ph.transform.remove_host_prefix (ph.transform.service_as_host (), 9 )}},
+         width: 2,
+         height: 1},
+        {widget: ph.widgets.text,
+         options: {label: "Mastodon/# toots",
+                   source: {query: 'service = "mastodon/status-count"',
+                            transform: ph.transform.remove_host_prefix (ph.transform.service_as_host (), 9 )}},
+         width: 2,
+         height: 1},
+        {widget: ph.widgets.text,
+         options: {label: "Mastodon/# connected domains",
+                   source: {query: 'service = "mastodon/domain-count"',
+                            transform: ph.transform.remove_host_prefix (ph.transform.service_as_host (), 9 )}},
          width: 3,
-         height: 2},
-
-        {widget: ph.widgets.log,
-         options: {label: "Logs",
-                   source: {index: "syslog-ng",
-                            method: "elasticsearch",
-                            limit: 14,
-                            query: {
-                                sort: {"@timestamp": "desc"},
-                                query: {
-                                    "filtered": {
-                                        "filter": {
-                                            "and": [
-                                                {
-                                                    "range": {
-                                                        "@timestamp": {"lte": "now"}
-                                                    }
-                                                }
-                                            ]
-                                        },
-                                        "query": {
-                                            "bool": {
-                                                "must_not": [
-                                                    {
-                                                        "term": {
-                                                            "message.PROGRAM": "edge"
-                                                        }
-                                                    },
-                                                    {
-                                                        "term": {
-                                                            "message.PROGRAM": "wpa_supplicant"
-                                                        }
-                                                    },
-                                                    {
-                                                        "term": {
-                                                            "message.PROGRAM": "networkmanager"
-                                                        }
-                                                    },
-                                                    {
-                                                        "term": {
-                                                            "message.PROGRAM": "modemmanager"
-                                                        }
-                                                    }
-                                                ]
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                           },
-                   on_message: util.syslog_to_log},
-         width: 11,
-         height: 2}
+         height: 1}
     ]
 };
