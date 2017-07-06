@@ -55,7 +55,7 @@ UI), [ws][ws] (for the Riemann WebSocket source),
 License
 -------
 
-Copyright (C) 2015 Gergely Nagy <algernon@madhouse-project.org>,
+Copyright (C) 2015-2017 Gergely Nagy <algernon@madhouse-project.org>,
 released under the terms of the
 [GNU General Public License][gpl], version 3+.
 
